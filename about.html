@@ -1,0 +1,106 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>Stimulation Label</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap');
+:root{--sky:#a9aec4;--ink:#1d1d1d;--paper:#f3ecdc;--mustard:#d9a441;--clay:#d6632f;--leaf:#3f8f5a;--rose:#e2b8c6;--muted:#555}
+*{box-sizing:border-box}html{background:var(--sky)}
+body{margin:0;background:var(--sky);color:var(--ink);font:16px/1.45 Nunito,"Trebuchet MS",sans-serif;overflow-x:hidden}
+main{max-width:760px;margin:0 auto;padding:36px 20px 120px;position:relative}
+.cloud{position:absolute;z-index:0;pointer-events:none}
+.hero{text-align:center;position:relative;z-index:1;margin-bottom:34px}
+.rainbow{display:block;margin:0 auto -18px;width:min(340px,80%)}
+.tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0 0 16px}
+.tiles span{display:inline-block;background:#fff;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);width:1.55em;height:1.7em;font:700 clamp(17px,5.2vw,26px)/1.65 Fredoka,sans-serif;letter-spacing:0;text-align:center}
+.tiles span:nth-child(odd){transform:rotate(-3deg)}.tiles span:nth-child(even){transform:rotate(2.5deg)}
+.tiles .gap{width:.5em;border:0;box-shadow:none;background:none}
+.tag{font:600 15px Fredoka,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.streak{position:absolute;left:0;top:-6px;background:var(--rose);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:6px 10px;transform:rotate(-6deg);font:700 12px/1.2 Fredoka,sans-serif;letter-spacing:.06em;text-transform:uppercase;text-align:center}
+form{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px;position:relative;z-index:1}
+input[type=text]{flex:1 1 220px;min-width:0;font:700 16px Nunito,sans-serif;padding:13px 18px;border:2px solid var(--ink);border-radius:999px;background:#fff;box-shadow:4px 4px 0 var(--ink)}
+input[type=text]:focus{outline:none;background:#fffdf5}
+button{flex:0 0 auto;font:600 15px Fredoka,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border:2px solid var(--ink);border-radius:999px;background:var(--paper);box-shadow:4px 4px 0 var(--ink);cursor:pointer;color:var(--ink)}
+button:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.close{position:absolute;top:-14px;right:-14px;width:36px;height:36px;display:grid;place-items:center;background:#fff;border:2px solid var(--ink);border-radius:50%;box-shadow:3px 3px 0 var(--ink);color:var(--ink);text-decoration:none;font:700 22px/1 Fredoka,sans-serif;z-index:2}.close:hover{background:var(--rose)}.close:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.panel{position:relative;z-index:1;background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:22px 24px;margin-bottom:26px}
+.panel h2{margin:0;font:600 13px Fredoka,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.panel .show{font:700 30px/1.1 Fredoka,sans-serif;margin:4px 0 2px}
+.panel .title{color:var(--muted);font-size:14px;margin-bottom:14px}
+.big{display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:12px 0;margin-bottom:8px}
+.pill{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:6px 16px;font:700 20px Fredoka,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#fff;box-shadow:3px 3px 0 var(--ink)}
+.big .score{font:700 22px Fredoka,sans-serif}.big .score small{font:700 13px Nunito,sans-serif;color:var(--muted)}
+.blurb{font-size:15px;color:var(--muted);margin:0 0 12px}
+.row{display:grid;grid-template-columns:1fr 64px 150px;align-items:center;gap:14px;padding:9px 0;border-bottom:2px dotted #b9b09b;font-size:15px;font-weight:700}
+.scale{display:block}.ends{display:flex;justify-content:space-between;margin-top:2px}.ends em{font:700 10px Nunito,sans-serif;color:var(--muted);font-style:normal}
+.row.head{font:600 11px Fredoka,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--ink);padding:4px 0}
+.row .pct{color:var(--muted);font-size:13px}
+.row .v{text-align:right;font-variant-numeric:tabular-nums}
+.bar{display:block;height:14px;border:2px solid var(--ink);background:#fff;border-radius:999px;overflow:hidden}.bar i{display:block;height:100%}
+.foot{font-size:12px;color:var(--muted);margin-top:12px}
+.band{position:relative;z-index:1;display:flex;align-items:center;gap:12px;margin:34px 0 12px}
+.band .pill{font-size:15px;padding:5px 14px}.band small{font:700 13px Nunito,sans-serif;color:var(--ink);letter-spacing:.04em;text-transform:uppercase}
+details.card{position:relative;z-index:1;background:var(--paper);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);margin-bottom:12px;padding:0 16px}
+details.card summary{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;padding:13px 0;cursor:pointer;list-style:none}
+details.card summary::-webkit-details-marker{display:none}
+.sn{font:600 19px Fredoka,sans-serif}.ss{font:700 13px Nunito,sans-serif;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.dot{width:30px;height:30px;border:2px solid var(--ink);border-radius:50%;display:inline-grid;place-items:center;font:700 12px Fredoka,sans-serif;color:#fff;box-shadow:2px 2px 0 var(--ink)}
+.vid{display:grid;grid-template-columns:1fr 36px;gap:8px;align-items:center;padding:9px 0 9px 4px;border-top:2px dotted #b9b09b;font-size:14px;font-weight:700}
+.vl{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;text-decoration:none;color:inherit}.vl:hover .vt{text-decoration:underline}
+.yt{display:grid;place-items:center;width:32px;height:32px;border:2px solid var(--ink);border-radius:50%;background:#fff;box-shadow:2px 2px 0 var(--ink);color:var(--ink);text-decoration:none;font-size:12px}.yt:active{transform:translate(2px,2px);box-shadow:none}
+.watch{display:inline-block;margin-left:8px;font:700 12px Nunito,sans-serif;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:2px 10px;text-decoration:none;box-shadow:2px 2px 0 var(--ink)}.watch:active{transform:translate(2px,2px);box-shadow:none}
+.err{position:relative;z-index:1;background:var(--rose);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:14px 16px;margin-bottom:24px;font-weight:700}
+.sub{text-align:center;margin:0 0 26px}
+.about p,.about li{font-size:15px;font-weight:600;line-height:1.55}.about h3{font:600 13px Fredoka,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin:22px 0 6px;border-bottom:2px solid var(--ink);padding-bottom:4px}
+.metrics{width:100%;border-collapse:collapse;font-size:14px;font-weight:600}.metrics th{text-align:left;font:600 11px Fredoka,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:4px 6px 6px 0}.metrics td{vertical-align:top;padding:8px 8px 8px 0;border-top:2px dotted #b9b09b}.metrics td:first-child{font-weight:800;white-space:nowrap}.metrics td:last-child{white-space:nowrap}
+.weights{text-align:center;background:#fff;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:10px}
+.nav{position:relative;z-index:1;display:flex;justify-content:center;gap:10px;margin:-10px 0 26px}.nav a{font:600 13px Fredoka,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:6px 14px;box-shadow:3px 3px 0 var(--ink)}.nav a:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+@media(max-width:560px){.metrics td:last-child{white-space:normal}}
+.ground{position:fixed;left:0;right:0;bottom:0;height:54px;background:var(--paper);border-top:2px solid var(--ink);z-index:2;display:flex;justify-content:center;align-items:center;gap:36px;font:600 12px Fredoka,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+@media(max-width:560px){.row{grid-template-columns:1fr 54px 100px;gap:8px}.big{flex-wrap:wrap}.streak{display:none}.panel{padding:18px 16px}main{padding:28px 14px 110px}.cloud{opacity:.9}}
+</style><main><svg class="cloud" viewBox="0 0 220 110" width="170" style="left:-60px;top:70px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><svg class="cloud" viewBox="0 0 220 110" width="120" style="right:-40px;top:30px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><svg class="cloud" viewBox="0 0 220 110" width="200" style="left:-90px;top:520px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><svg class="cloud" viewBox="0 0 220 110" width="140" style="right:-50px;top:760px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg>
+<div class="hero"><div class="streak">48 videos<br>scored</div><svg class="rainbow" viewBox="0 0 340 170"><g stroke="#1d1d1d" stroke-width="4" fill="none"><path d="M20 165 A150 150 0 0 1 320 165" stroke="#d6632f" stroke-width="30"/><path d="M52 165 A118 118 0 0 1 288 165" stroke="#d9a441" stroke-width="30"/><path d="M84 165 A86 86 0 0 1 256 165" stroke="#3f8f5a" stroke-width="30"/><path d="M20 165 A150 150 0 0 1 320 165 M100 165 A70 70 0 0 1 240 165"/></g><g fill="#fff" stroke="#1d1d1d" stroke-width="3"><circle cx="152" cy="52" r="9"/><circle cx="188" cy="52" r="9"/></g><g fill="#1d1d1d"><circle cx="155" cy="54" r="4"/><circle cx="191" cy="54" r="4"/></g></svg><div class="tiles"><span>S</span><span>T</span><span>I</span><span>M</span><span>U</span><span>L</span><span>A</span><span>T</span><span>I</span><span>O</span><span>N</span></div><div class="tiles"><span>L</span><span>A</span><span>B</span><span>E</span><span>L</span></div>
+<p class="tag">A nutrition label for kids' video.</p></div>
+<nav class="nav"><a href="index.html">Shows</a><a href="about.html">How it works</a></nav>
+
+
+<div class="panel about"><a class="close" href="index.html" title="Back to all shows" aria-label="Close">×</a>
+<h2>About</h2>
+<div class="show">How the label works</div>
+<p>Every video gets five measurements, each mapped onto a calm&nbsp;→&nbsp;intense scale, then combined into one score from 0 to 100. The score is relative to the kids' shows we scored, not an absolute medical threshold.</p>
+
+<h3>What we sample</h3>
+<p>We don't score whole videos. For each one we take <b>three one-minute windows at 20%, 50% and 80% of its length</b> and analyse them together. The opening is skipped on purpose: intros and theme songs are cut faster than the body of a show. Videos under four minutes are taken whole. Each entry is the top YouTube search result for the show's name, downloaded at 360p; the title and link are shown on its card so you can check what was measured.</p>
+
+<h3>The five metrics</h3>
+<table class="metrics">
+<tr><th>Metric</th><th>How it's measured</th><th>Calm end → intense end</th></tr>
+<tr><td>Cuts per minute</td><td>Hard scene changes, found with PySceneDetect's content detector (it compares colour and edges between consecutive frames and flags a cut when the change spikes). Divided by the sampled length.</td><td>5 → 30 per minute</td></tr>
+<tr><td>On-screen motion</td><td>How much the picture changes between frames even when there is no cut. We take 4 frames a second in greyscale at 160&nbsp;px wide, average the pixel difference between consecutive frames, drop the frames that are cuts, and take the median. Shown ×1000.</td><td>20 → 120</td></tr>
+<tr><td>Loudness</td><td>Average level of the soundtrack in decibels (dBFS) over 100&nbsp;ms windows, ignoring silent windows. 0&nbsp;dB is the loudest a file can be; −40&nbsp;dB is very quiet.</td><td>−40 → −12 dB</td></tr>
+<tr><td>Non-stop sound</td><td>Share of 100&nbsp;ms windows above −40&nbsp;dBFS, i.e. how much of the time there is any sound at all. A show that pauses between lines scores lower here.</td><td>60% → 100%</td></tr>
+<tr><td>Colour saturation</td><td>One frame a second, converted to HSV; the mean saturation channel. 0% is greyscale, 100% is fully vivid colour.</td><td>35% → 65%</td></tr>
+</table>
+
+<h3>From metrics to a score</h3>
+<p>Each measurement is placed on its scale: the calm end counts as 0, the intense end as 100, anything beyond the ends is clipped. Those five sub-scores are weighted and added:</p>
+<p class="weights"><b>cuts 30%</b> · <b>motion 30%</b> · <b>loudness 20%</b> · <b>non-stop sound 10%</b> · <b>saturation 10%</b></p>
+<p>Cuts and motion carry the most weight because they separated the shows most clearly in testing. The result becomes a label: <b>Low</b> under 40, <b>Medium</b> 40–64, <b>High</b> 65 and up.</p>
+
+<h3>How we set the scales</h3>
+<p>The scale ends were chosen by scoring a reference set of 41 shows parents named in our survey and interviews, from Bluey and Oswald at the calm end to Cocomelon and Vlad and Niki at the intense end. We then checked the ranking three ways: scoring different episodes of the same show (three Cocomelon videos landed 66–77, all High), re-running with all five metrics weighted equally, and re-running with motion removed entirely. The order of shows barely moved in any of the three.</p>
+
+<h3>What the research says about pacing</h3>
+<p>The pediatric literature uses the same variable. Lillard &amp; Peterson (<i>Pediatrics</i>, 2011) found 4-year-olds did worse on self-control tasks right after nine minutes of a cartoon that cut every 11 seconds, versus one that cut every 34. A 2024 study of 864 toddlers (<i>Frontiers in Public Health</i>) defined fast-paced as a cut every 10 seconds or less and found higher difficulty scores in children who mostly watched it. The American Academy of Pediatrics advises against fast-paced programmes for under-fives and has said Cocomelon's pace draws expert criticism, while noting no study has tested Cocomelon itself. By the research definition (a cut every ≤10&nbsp;s, about 6 per minute), nearly every show here is fast-paced; our bands compare shows to each other, not to that older baseline.</p>
+
+<h3>Known limits</h3>
+<ul>
+<li><b>One video per show, mostly.</b> A show's score is the average of the videos we scored for it. Different episodes vary; Cocomelon's three videos span 66–77.</li>
+<li><b>Live action filmed handheld</b> (Blippi) has few hard cuts; its intensity shows up as motion and loudness instead, so it reads lower than its reputation.</li>
+<li><b>Old cartoons</b> (Tom and Jerry) have quiet mono audio and faded colour, which pulls them down regardless of pacing.</li>
+<li><b>Trailers and compilations</b> are cut faster than episodes. We try to score episodes; the link on each card shows what was used.</li>
+<li><b>Not measured yet:</b> on-screen text overlays, word repetition, and musical hooks, all of which parents mentioned.</li>
+<li><b>Not a health claim.</b> The score describes how a video is made. It says nothing about whether a particular child should watch it.</li>
+</ul>
+<p class="foot">Built by Team 109, Cornell Tech Product Studio, 2026. Prototype scorer; results for all 48 videos available on request.</p>
+</div>
+
+</main>
+<div class="ground"><span>High</span><span style="color:var(--muted)">·</span><span>Medium</span><span style="color:var(--muted)">·</span><span>Low</span></div>
