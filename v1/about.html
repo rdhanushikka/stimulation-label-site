@@ -54,6 +54,13 @@ details.card summary::-webkit-details-marker{display:none}
 .nav{position:relative;z-index:1;display:flex;justify-content:center;gap:10px;margin:-10px 0 26px}.nav+.panel{margin-top:4px}.panel+.hero{margin-top:48px}.nav a{font:600 13px Fredoka,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:6px 14px;box-shadow:3px 3px 0 var(--ink)}.nav a:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}.nav select.ver{font:600 12px Fredoka,sans-serif;letter-spacing:.06em;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:6px 10px;box-shadow:3px 3px 0 var(--ink)}
 @media(max-width:560px){.metrics td:last-child{white-space:normal}}
 .ground{position:fixed;left:0;right:0;bottom:0;height:54px;background:var(--paper);border-top:2px solid var(--ink);z-index:2;display:flex;justify-content:center;align-items:center;gap:36px;font:600 12px Fredoka,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+/* --- card overlay --- */
+#modal{position:fixed;inset:0;z-index:50;display:none}#modal.on{display:block}
+#modal .backdrop{position:absolute;inset:0;background:rgba(29,29,29,.45)}
+#modal .box{position:absolute;left:50%;top:24px;transform:translateX(-50%);width:min(860px,calc(100% - 16px));max-height:calc(100% - 48px);overflow:auto;padding:18px 18px 12px}
+#modal .box .panel{margin:0}
+body.locked{overflow:hidden}
+@media(max-width:560px){#modal .box{top:16px;max-height:calc(100% - 32px)}}
 /* --- grid layout --- */
 .top{position:relative;z-index:1;text-align:center;margin-bottom:22px}.top .rainbow{width:min(300px,70%);margin:0 auto -16px}.top .tiles{margin:0 0 10px}.top .tag{margin:0 0 14px;font-size:14px}
 .top .nav{margin:0;justify-content:center;flex-wrap:wrap}
@@ -116,5 +123,22 @@ details.card summary::-webkit-details-marker{display:none}
 </ul>
 <p class="foot">Built by Team 109, Cornell Tech Product Studio, 2026. Proof of concept: the scorer is a prototype and this page's visual style is borrowed from the Gubbins app as a placeholder. Mello's own design comes later.</p>
 </div>
-</main>
+<div id="modal" class=""><div class="backdrop" onclick="closeCard()"></div><div class="box"></div></div><script>
+(function(){
+  const modal=document.getElementById('modal'), box=modal.querySelector('.box');
+  const home=document.querySelector('.nav a').getAttribute('href');
+  window.closeCard=function(){modal.classList.remove('on');document.body.classList.remove('locked');box.innerHTML='';
+    if(history.state&&history.state.card)history.back();else if(location.pathname.indexOf('/card/')>=0||location.search.indexOf('name=')>=0)history.replaceState({},'',home);};
+  function show(html,url,push){const doc=new DOMParser().parseFromString(html,'text/html');const f=doc.querySelector('#focus');
+    if(!f)return false; box.innerHTML=''; box.appendChild(f); modal.classList.add('on'); document.body.classList.add('locked'); box.scrollTop=0;
+    const x=box.querySelector('.close'); if(x){x.setAttribute('href','#');x.onclick=function(e){e.preventDefault();closeCard();};}
+    if(push)history.pushState({card:url},'',url); return true;}
+  document.addEventListener('click',function(e){const a=e.target.closest('a.vl');if(!a)return;
+    e.preventDefault();const url=a.getAttribute('href');
+    fetch(url).then(r=>r.text()).then(h=>{if(!show(h,url,true))location.href=url;}).catch(()=>{location.href=url;});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('on'))closeCard();});
+  window.addEventListener('popstate',function(){if(modal.classList.contains('on')&&!(history.state&&history.state.card)){modal.classList.remove('on');document.body.classList.remove('locked');box.innerHTML='';}});
+  if(modal.classList.contains('on')){document.body.classList.add('locked');const x=box.querySelector('.close');if(x){x.setAttribute('href',home);x.onclick=function(e){e.preventDefault();closeCard();};}}
+})();
+</script></main>
 <div class="ground"><span>High</span><span style="color:var(--muted)">·</span><span>Medium</span><span style="color:var(--muted)">·</span><span>Low</span></div>
