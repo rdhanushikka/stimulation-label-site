@@ -4,7 +4,7 @@
 :root{--sky:#a9aec4;--ink:#1d1d1d;--paper:#f3ecdc;--mustard:#d9a441;--clay:#d6632f;--leaf:#3f8f5a;--rose:#e2b8c6;--muted:#555}
 *{box-sizing:border-box}html{background:var(--sky)}
 body{margin:0;background:var(--sky);color:var(--ink);font:16px/1.45 Nunito,"Trebuchet MS",sans-serif;overflow-x:hidden}
-main{max-width:760px;margin:0 auto;padding:36px 20px 120px;position:relative}
+main{max-width:1180px;margin:0 auto;padding:22px 24px 110px;position:relative}
 .cloud{position:absolute;z-index:0;pointer-events:none}
 .hero{text-align:center;position:relative;z-index:1;margin-bottom:34px}
 .rainbow{display:block;margin:0 auto -18px;width:min(340px,80%)}
@@ -54,8 +54,29 @@ details.card summary::-webkit-details-marker{display:none}
 .nav{position:relative;z-index:1;display:flex;justify-content:center;gap:10px;margin:-10px 0 26px}.nav+.panel{margin-top:4px}.panel+.hero{margin-top:48px}.nav a{font:600 13px Fredoka,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:6px 14px;box-shadow:3px 3px 0 var(--ink)}.nav a:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}.nav select.ver{font:600 12px Fredoka,sans-serif;letter-spacing:.06em;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:6px 10px;box-shadow:3px 3px 0 var(--ink)}
 @media(max-width:560px){.metrics td:last-child{white-space:normal}}
 .ground{position:fixed;left:0;right:0;bottom:0;height:54px;background:var(--paper);border-top:2px solid var(--ink);z-index:2;display:flex;justify-content:center;align-items:center;gap:36px;font:600 12px Fredoka,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+/* --- grid layout --- */
+.top{position:relative;z-index:1;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;margin-bottom:22px}
+.top .tiles{margin:0;justify-content:flex-start}.top .tiles span{width:1.3em;height:1.45em;font-size:18px;line-height:1.4}
+.top .nav{margin:0;justify-content:flex-start;flex-wrap:wrap}
+.heroband{position:relative;z-index:1;display:grid;grid-template-columns:minmax(260px,380px) 1fr;gap:26px;align-items:center;background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:22px 28px;margin-bottom:26px}
+.heroband .art{text-align:center;position:relative}.heroband .rainbow{width:min(300px,100%);margin:0 auto -14px}
+.heroband .tiles{margin:0}.heroband .tag{margin:14px 0 8px;font-size:14px}
+.heroband .lede{font-size:17px;font-weight:700;line-height:1.5;margin:0 0 14px}
+.heroband .stats{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
+.stat{background:#fff;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:8px 12px;font:700 12px/1.2 Fredoka,sans-serif;letter-spacing:.06em;text-transform:uppercase}.stat b{display:block;font-size:22px;letter-spacing:0}
+.heroband form{margin:0}.heroband .panel{margin:0;box-shadow:3px 3px 0 var(--ink);padding:12px 16px;font-size:14px}
+.band{margin:30px 0 12px}.band:first-of-type{margin-top:6px}
+.grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;align-items:start}
+.grid details.card{margin:0;padding:0}
+.grid details.card summary{display:grid;grid-template-columns:48px 1fr;grid-template-areas:"dot name" "dot sub";column-gap:12px;row-gap:2px;align-items:center;padding:14px 16px}
+.grid details.card summary .dot{grid-area:dot;width:44px;height:44px;font-size:15px}
+.grid details.card summary .sn{grid-area:name;font-size:17px;line-height:1.15}.grid details.card summary .ss{grid-area:sub;font-size:11px}
+.grid details.card[open]{grid-column:1/-1}.grid details.card[open] .vid{margin:0 16px}.grid details.card[open] .vid:last-child{margin-bottom:8px}
+.grid .band{grid-column:1/-1}
+.listhead{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0 4px}
+@media(max-width:860px){.heroband{grid-template-columns:1fr;padding:18px}.top{grid-template-columns:1fr;gap:12px}.top .tag{display:none}.nav{flex-wrap:wrap}.band{flex-wrap:wrap}.band small{white-space:normal}.heroband .lede{font-size:15px}main{overflow:hidden}}
 @media(max-width:560px){.row{grid-template-columns:1fr 54px 100px;gap:8px}.big{flex-wrap:wrap}.streak{display:none}.panel{padding:18px 16px}main{padding:28px 14px 110px}.cloud{opacity:.9}}
-</style><main><svg class="cloud" viewBox="0 0 220 110" width="170" style="left:-60px;top:70px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><svg class="cloud" viewBox="0 0 220 110" width="120" style="right:-40px;top:30px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><svg class="cloud" viewBox="0 0 220 110" width="200" style="left:-90px;top:520px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><svg class="cloud" viewBox="0 0 220 110" width="140" style="right:-50px;top:760px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><nav class="nav"><a href="index.html">Shows</a><a href="about.html">How it works</a><select class="ver" onchange="location.href=this.value" aria-label="scorer version"><option value="index.html" selected>v2 · TransNetV2 cut detector</option><option value="v1/index.html" >v1 · PySceneDetect cut detector</option></select></nav>
+</style><main><svg class="cloud" viewBox="0 0 220 110" width="150" style="left:-70px;top:120px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><svg class="cloud" viewBox="0 0 220 110" width="110" style="right:-40px;top:40px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><svg class="cloud" viewBox="0 0 220 110" width="180" style="left:-90px;top:640px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><svg class="cloud" viewBox="0 0 220 110" width="130" style="right:-50px;top:900px"><path d="M30 95 Q5 95 8 72 Q10 52 32 54 Q34 30 58 30 Q70 10 95 18 Q115 2 140 16 Q165 10 172 36 Q200 34 206 58 Q218 80 196 95 Z" fill="#fff" stroke="#1d1d1d" stroke-width="4" stroke-linejoin="round"/></svg><div class="top"><a href="index.html" style="text-decoration:none;color:inherit"><div class="tiles"><span>M</span><span>E</span><span>L</span><span>L</span><span>O</span></div></a><nav class="nav"><a href="index.html">Shows</a><a href="about.html">How it works</a><select class="ver" onchange="location.href=this.value" aria-label="scorer version"><option value="index.html" selected>v2 · TransNetV2 cut detector</option><option value="v1/index.html" >v1 · PySceneDetect cut detector</option></select></nav><span class="tag" style="font-size:12px;text-align:right">the stimulation label</span></div>
 <div class="panel about" id="focus"><a class="close" href="index.html" title="Back to all shows" aria-label="Close">×</a>
 <h2>About</h2>
 <div class="show">How Mello works</div>
@@ -96,5 +117,5 @@ details.card summary::-webkit-details-marker{display:none}
 </ul>
 <p class="foot">Built by Team 109, Cornell Tech Product Studio, 2026. Proof of concept: the scorer is a prototype and this page's visual style is borrowed from the Gubbins app as a placeholder. Mello's own design comes later.</p>
 </div>
-<div class="hero"><div class="streak">50 videos<br>scored</div><svg class="rainbow" viewBox="0 0 340 170"><g stroke="#1d1d1d" stroke-width="4" fill="none"><path d="M20 165 A150 150 0 0 1 320 165" stroke="#d6632f" stroke-width="30"/><path d="M52 165 A118 118 0 0 1 288 165" stroke="#d9a441" stroke-width="30"/><path d="M84 165 A86 86 0 0 1 256 165" stroke="#3f8f5a" stroke-width="30"/><path d="M20 165 A150 150 0 0 1 320 165 M100 165 A70 70 0 0 1 240 165"/></g><g fill="#fff" stroke="#1d1d1d" stroke-width="3"><circle cx="152" cy="52" r="9"/><circle cx="188" cy="52" r="9"/></g><g fill="#1d1d1d"><circle cx="155" cy="54" r="4"/><circle cx="191" cy="54" r="4"/></g></svg><div class="tiles"><span>M</span><span>E</span><span>L</span><span>L</span><span>O</span></div><p class="tag">The stimulation label · a nutrition label for kids' video</p></div></main>
+</main>
 <div class="ground"><span>High</span><span style="color:var(--muted)">·</span><span>Medium</span><span style="color:var(--muted)">·</span><span>Low</span></div>
