@@ -94,8 +94,8 @@ body.locked{overflow:hidden}
 <h3>The five metrics</h3>
 <table class="metrics">
 <tr><th>Metric</th><th>How it's measured</th><th>Calm end → intense end</th></tr>
-<tr><td>Cuts per minute</td><td>Hard scene changes, found with PySceneDetect's content detector (it compares colour and edges between consecutive frames and flags a cut when the change spikes). Divided by the sampled length.</td><td>5 → 30 per minute</td></tr>
-<tr><td>On-screen motion</td><td>How much the picture changes between frames even when there is no cut. We take 4 frames a second in greyscale at 160&nbsp;px wide, average the pixel difference between consecutive frames, drop the frames that are cuts, and take the median. Shown ×1000.</td><td>20 → 120</td></tr>
+<tr><td>Cuts per minute</td><td>Hard scene changes, found with PySceneDetect's content detector, which compares colour and brightness between consecutive frames and flags a cut when the change spikes. Superseded by v2: it misses cuts between similar-looking shots and fires on fast camera moves. Divided by the sampled length.</td><td>5 → 30 per minute</td></tr>
+<tr><td>On-screen motion</td><td>How much the picture changes between frames even when there is no cut. We take 4 frames a second in greyscale at 160&nbsp;px wide, average the pixel difference between consecutive frames, drop the frame pairs that are cuts, and average what's left. Shown ×1000.</td><td>20 → 120</td></tr>
 <tr><td>Loudness</td><td>Average level of the soundtrack in decibels (dBFS) over 100&nbsp;ms windows, ignoring silent windows. 0&nbsp;dB is the loudest a file can be; −40&nbsp;dB is very quiet.</td><td>−40 → −12 dB</td></tr>
 <tr><td>Non-stop sound</td><td>Share of 100&nbsp;ms windows above −40&nbsp;dBFS, i.e. how much of the time there is any sound at all. A show that pauses between lines scores lower here.</td><td>60% → 100%</td></tr>
 <tr><td>Colour saturation</td><td>One frame a second, converted to HSV; the mean saturation channel. 0% is greyscale, 100% is fully vivid colour.</td><td>35% → 65%</td></tr>
